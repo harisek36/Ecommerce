@@ -1,0 +1,60 @@
+
+<div *ngIf="!f_firstName; else forminfo">
+  <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
+    <div class="form-container">
+
+      <div class="row columns">
+
+        <h1>Create User</h1>
+
+        <label>First Name
+          <input type="text" formControlName="f_firstName">
+        </label>
+        <div class="alert" *ngIf="!rForm.controls['f_firstName'].valid && rForm.controls['f_firstName'].touched">{{ titleAlert }}</div>
+
+
+        <label>Last Name
+          <input type="text" formControlName="f_lastName">
+        </label>
+        <div class="alert" *ngIf="!rForm.controls['f_lastName'].valid && rForm.controls['f_lastName'].touched">{{ titleAlert }}</div>
+
+
+        <label>Email Address
+          <input type="text" formControlName="f_emailAddress">
+        </label>
+        <div class="alert" *ngIf="!rForm.controls['f_emailAddress'].valid && rForm.controls['f_emailAddress'].touched">{{ titleAlert }}</div>
+
+        <label>Password
+          <input type="{{ isActive ? 'text' : 'password' }}" formControlName="f_password" placeholder="Nine+twelve=21 or Walk to the park">
+        </label>
+        <div class="alert" *ngIf="!rForm.controls['f_password'].valid && rForm.controls['f_password'].touched">Please enter a strong password.</div>
+
+        <label>Confirm Password
+          <input type="{{ isActive ? 'text' : 'password' }}" formControlName="f_passwordCheck">
+        </label>
+        <div class="alert" *ngIf="!rForm.controls['f_passwordCheck'].valid && rForm.controls['f_passwordCheck'].touched">Passwords do not match.</div>
+
+        <input type="checkbox" name="validateCheckbox" formControlName="validate" value="1">  Show Password<br>
+
+        <label>Phone Number
+          <input type="number" formControlName="f_number">
+        </label>
+        <div class="alert" *ngIf="!rForm.controls['f_number'].valid && rForm.controls['f_number'].touched">Please enter a valid phone number.</div>
+
+        <input type="submit" class="button expanded" value="Create User" [disabled]="!rForm.valid">
+
+      </div>
+    </div>
+  </form>
+</div>
+
+
+<ng-template #forminfo>
+  <div class="form-container">
+    <div class="row columns">
+      <h1>{{ f_firstName }} {{f_lastName}}</h1>
+
+      <p>{{ f_emailAddress }}</p>
+    </div>
+  </div>
+</ng-template>
